@@ -1,5 +1,6 @@
 name: n60pro
-
+permissions:
+      contents: write
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -23,8 +24,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
     - name: Before freeing up disk space
       run: |
@@ -245,8 +244,9 @@ jobs:
     - name: Remove old Releases
       uses: dev-drprasad/delete-older-releases@v0.1.0
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         keep_latest: 10
         delete_tags: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      
