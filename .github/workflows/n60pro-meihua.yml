@@ -99,19 +99,11 @@ jobs:
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
-    - name: 修改 Argon 主题左上角字体变小
+    - name: small-font
       run: |
-          find "$GITHUB_WORKSPACE" -path "*argon*css*style.css" -exec sed -i 's/font-size: 24px/font-size: 18px/g' {} \;
-          find "$GITHUB_WORKSPACE" -path "*argon*css*style.css" -exec sed -i 's/font-size:24px/font-size:18px/g' {} \;
+          find "$GITHUB_WORKSPACE" -name "cascade.css" -o -name "dark.css" | xargs sed -i 's/font-size: 1.8rem/font-size: 1.2rem/g'
           echo "✅ 字体修改完成（自动搜索路径）"
 
-          DTS_FILE=$(find "$GITHUB_WORKSPACE" -name "mt7986a-netcore-n60-pro.dts" -type f 2>/dev/null | head -1)
-          if [ -n "$DTS_FILE" ]; then
-            echo "✅ 找到DTS：$DTS_FILE"
-            sed -i 's/partition@180000 {/factory: partition@180000 {/' "$DTS_FILE"
-            sed -i '/nvmem-cell-names = "eeprom";/a\    mediatek,eeprom-mtd = <&factory>;' "$DTS_FILE"
-            echo "✅ WiFi factory 修复完成"
-          fi
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
