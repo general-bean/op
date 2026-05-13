@@ -1,8 +1,8 @@
-name: n60pro
+name: n60pro-meihua
 permissions:
       contents: write
 on:
-  repository_dispatch:
+ # repository_dispatch:
   workflow_dispatch:
   
  # schedule:
