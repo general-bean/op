@@ -14,7 +14,7 @@ env:
   REPO_BRANCH: openwrt-24.10-6.6
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: 237/N60pro.config
-  EEPROM_FILE: 237/EEPROM_AX6000.bin
+  EEPROM_FILE: 237/MT7986_iPAiLNA_EEPROM_AX6000.bin
   DIY_P1_SH: 237/diy1.sh
   DIY_P2_SH: 237/diy2.sh
   UPLOAD_BIN_DIR: false
